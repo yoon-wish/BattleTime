@@ -38,6 +38,7 @@ public abstract class Unit {
 		return this.hp;
 	}
 	
+	// 포션 섭취시
 	public void setHp() {
 		this.hp += 200; 
 	}
