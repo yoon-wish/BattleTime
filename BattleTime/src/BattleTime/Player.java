@@ -10,6 +10,10 @@ public class Player extends Unit {
 		return super.getHp();
 	}
 	
+	public void setHp() {
+		super.setHp();
+	}
+	
 	public String getName() {
 		return super.getName();
 	}

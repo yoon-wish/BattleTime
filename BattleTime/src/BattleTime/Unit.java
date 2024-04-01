@@ -38,6 +38,10 @@ public abstract class Unit {
 		return this.hp;
 	}
 	
+	public void setHp() {
+		this.hp += 200; 
+	}
+	
 	public void attack(Unit target) {
 		target.hp -= power;
 		System.out.printf("[%s](이)가 [%s]에게 %d의 데미지를 입힙니다.\n", this.name, target.name, power);
