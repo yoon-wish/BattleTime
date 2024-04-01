@@ -9,9 +9,9 @@ public abstract class Unit {
 	private int[] hpBar;
 	private final int MY_HP = 1;
 	
-	Unit(){}
+	public Unit(){}
 	
-	Unit(String name, int maxHp, int power){
+	public Unit(String name, int maxHp, int power){
 		this.name = name;
 		this.maxHp = maxHp;
 		this.hp = maxHp;
@@ -19,7 +19,13 @@ public abstract class Unit {
 		this.hpBar = new int[hp/50];
 	}
 	
-	void attack(Unit target) {
+	public void init(int maxHp, int power) {
+		this.maxHp = maxHp;
+		this.hp = maxHp;
+		this.power = power;
+	}
+	
+	public void attack(Unit target) {
 		target.hp -= power;
 		System.out.printf("[%s](이)가 [%s]에게 %d의 데미지를 입힙니다.\n", this.name, target.name, power);
 		if(target.hp <= 0) {
@@ -28,7 +34,7 @@ public abstract class Unit {
 		}
 	}
 	
-	void printData() {
+	public void printData() {
 		double temp = hp;
 		temp = Math.round(temp / 50);
 		for(int i=0; i<hpBar.length; i++) {
