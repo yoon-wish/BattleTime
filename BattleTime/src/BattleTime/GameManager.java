@@ -17,14 +17,14 @@ public class GameManager {
 		stageList.put("BATTLE", new StageBattle());
 		stageList.put("LOBBY", new StageLobby());
 		stageList.put("VILLAGE", new StageVillage());
-		stageList.put("STORE", new StageVillage());
+		stageList.put("STORE", new StageStore());
 		
 		nextStage = "TITLE";
 	}
 	
 	public boolean changeStage() {
-		if(curStage != "" && curStage != "TITLE") {
-			System.out.printf("===== [%s] =====\n", curStage);
+		if(nextStage != "" && nextStage != "TITLE") {
+			System.out.printf("❖❖❖❖ [%s] ❖❖❖❖\n", nextStage);
 		}
 		
 		if(curStage.equals(nextStage))
