@@ -26,14 +26,14 @@ public class StageLobby extends Stage {
 			GameManager.nextStage = "BATTLE";
 		else if (sel == EXIT)
 			GameManager.nextStage = "";
-		
-		return true;
+
+		return false;
 	}
-	
+
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
