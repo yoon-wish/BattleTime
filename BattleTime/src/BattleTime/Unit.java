@@ -23,6 +23,15 @@ public abstract class Unit {
 		this.maxHp = maxHp;
 		this.hp = maxHp;
 		this.power = power;
+		this.hpBar = new int[hp/50];
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public int getHp() {
+		return this.hp;
 	}
 	
 	public void attack(Unit target) {
@@ -37,6 +46,7 @@ public abstract class Unit {
 	public void printData() {
 		double temp = hp;
 		temp = Math.round(temp / 50);
+		
 		for(int i=0; i<hpBar.length; i++) {
 			hpBar[i] = 0;
 		}
@@ -49,9 +59,9 @@ public abstract class Unit {
 		
 		for(int i=0; i<hpBar.length; i++) {
 			if(hpBar[i] == MY_HP)
-				System.out.println("■");
+				System.out.print("■");
 			else 
-				System.out.println("□");
+				System.out.print("□");
 		}
 		
 		System.out.printf("[%d/%d]\n", this.hp, this.maxHp);
