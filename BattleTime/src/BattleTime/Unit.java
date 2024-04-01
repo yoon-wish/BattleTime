@@ -34,6 +34,10 @@ public abstract class Unit {
 		this.name = name;
 	}
 	
+	public int getMaxHp() {
+		return this.maxHp;
+	}
+	
 	public int getHp() {
 		return this.hp;
 	}
@@ -41,6 +45,10 @@ public abstract class Unit {
 	// 포션 섭취시
 	public void setHp() {
 		this.hp += 200; 
+	}
+	
+	public void setHp(int hp) {
+		this.hp = hp; 
 	}
 	
 	public void attack(Unit target) {
