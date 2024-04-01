@@ -33,7 +33,7 @@ public class GameManager {
 	
 	public boolean changeStage() {
 		if(nextStage != "" && nextStage != "TITLE") {
-			System.out.printf("\n❖❖❖❖ [%s] ❖❖❖❖\n", nextStage);
+			System.out.printf("»»———— [%s] ————««\n", nextStage);
 		}
 		
 		if(curStage.equals(nextStage))
