@@ -1,5 +1,5 @@
 package BattleTime;
 
-public class stageTitle {
+public class StageTitle extends Stage{
 
 }
