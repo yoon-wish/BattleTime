@@ -14,6 +14,7 @@ public class GameManager {
 	public static UnitManager unitManager = new UnitManager();
 	public static FileManager fileManager = new FileManager();
 	public static ArrayList<Player> playerList;
+	public static ArrayList<Unit> monsterList;
 	
 	public static int day;			// 날짜
 	public static int potion;		// 길드가 보유한 포션
@@ -38,8 +39,8 @@ public class GameManager {
 		
 		// 기본 값 부여
 		ranHp = 8;
-//		ranPower = 60;
-		ranPower = 500;
+		ranPower = 60;
+//		ranPower = 500;
 		day = 1;
 		coin = 100;
 		

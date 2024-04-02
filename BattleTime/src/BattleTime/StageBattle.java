@@ -1,14 +1,11 @@
 package BattleTime;
 
-import java.util.ArrayList;
-
 public class StageBattle extends Stage {
 
 	private final int ATTACK = 1;
 	private final int SKILL = 2;
 	private final int INVENTORY = 3;
 
-	private ArrayList<Unit> monsterList;
 	private int playerDead = 0;
 	private int monsterDead = 0;
 	
@@ -33,7 +30,7 @@ public class StageBattle extends Stage {
 					player_idx = 0;
 				}
 			} else if (!turn) {
-				if (monster_idx < monsterList.size()) {
+				if (monster_idx < GameManager.monsterList.size()) {
 					System.out.println();
 					monster_attack(monster_idx);
 					monster_idx += 1;
@@ -49,73 +46,80 @@ public class StageBattle extends Stage {
 		}
 
 		if (monsterDead <= 0) {
-			int coin = GameManager.rand.nextInt(100) + 200;
-			System.out.println("┌────────────────────────────┐");
-			System.out.println("   배틀에서 승리했다");
-			System.out.printf("   보상으로 %d 코인 획득!\n", coin);
-			System.out.println("└────────────────────────────┘");
-
-			GameManager.battleNum--;
-			GameManager.coin += coin;
-			GameManager.ranHp += 3; // 배틀 승리로 몬스터 체력 상승
-			GameManager.ranPower += 10; // 배틀 승리로 몬스터 파워 상승
-
+			monsterDead();
 			GameManager.nextStage = "LOBBY";
 		}
 
 		if (playerDead <= 0) {
-			int coin = GameManager.rand.nextInt(100) + 50;
-			int temp = GameManager.coin;
-			GameManager.coin -= coin;
-			if (GameManager.coin < 0) {
-				coin = temp;
-				GameManager.coin = 0;
-			}
-
-			allDead = true;
-			try {
-				System.out.println("┌────────────────────────────┐");
-				Thread.sleep(500);
-				System.out.println("   배틀에서 패배했다");
-				Thread.sleep(500);
-				System.out.printf("   %d 코인을 빼앗겼다!\n", coin);
-				Thread.sleep(500);
-				System.out.println("   눈 앞이 캄캄해졌다...!");
-				Thread.sleep(500);
-				System.out.println("   일단 아지트로 가자...");
-				System.out.println("└────────────────────────────┘");
-			} catch (Exception e) {
-			}
-
-
+			playerDead();
 			GameManager.nextStage = "HOUSE";
 		}
+		
 		return false;
 	}
 
 	@Override
 	public void init() {
-		if (monsterList == null) {
+		if (GameManager.monsterList == null) {
 			GameManager.unitManager.monster_rand_set(4);
-			monsterList = null;
-			monsterList = UnitManager.monster_list;
-			monsterDead = monsterList.size();
+			GameManager.monsterList = null;
+			GameManager.monsterList = UnitManager.monster_list;
+			monsterDead = GameManager.monsterList.size();
 			playerDead = GameManager.playerList.size();
 		} else {
-			for(int i=0; i<monsterList.size(); i++) {
-				monsterList.get(i).setHp(monsterList.get(i).getMaxHp());
+			for(int i=0; i<GameManager.monsterList.size(); i++) {
+				Unit monster = GameManager.monsterList.get(i);
+				monster.setHp(monster.getMaxHp());
 			}
 		}
 	}
+	
+	private void monsterDead() {
+		int coin = GameManager.rand.nextInt(100) + 200;
+		System.out.println("┌────────────────────────────┐");
+		System.out.println("   배틀에서 승리했다");
+		System.out.printf("   보상으로 %d 코인 획득!\n", coin);
+		System.out.println("└────────────────────────────┘");
 
-	void print_character() {
+		GameManager.battleNum--;
+		GameManager.coin += coin;
+		GameManager.ranHp += 3; // 배틀 승리로 몬스터 체력 상승
+		GameManager.ranPower += 10; // 배틀 승리로 몬스터 파워 상승
+	}
+	
+	private void playerDead() {
+		int coin = GameManager.rand.nextInt(100) + 50;
+		int temp = GameManager.coin;
+		GameManager.coin -= coin;
+		if (GameManager.coin < 0) {
+			coin = temp;
+			GameManager.coin = 0;
+		}
+
+		allDead = true;
+		try {
+			System.out.println("┌────────────────────────────┐");
+			Thread.sleep(500);
+			System.out.println("   배틀에서 패배했다");
+			Thread.sleep(500);
+			System.out.printf("   %d 코인을 빼앗겼다!\n", coin);
+			Thread.sleep(500);
+			System.out.println("   눈 앞이 캄캄해졌다...!");
+			Thread.sleep(500);
+			System.out.println("   일단 아지트로 가자...");
+			System.out.println("└────────────────────────────┘");
+		} catch (Exception e) {
+		}
+	}
+
+	private void print_character() {
 		System.out.println("\n===== [PLAYER] =====");
 		for (int i = 0; i < GameManager.playerList.size(); i++) {
 			GameManager.playerList.get(i).printData();
 		}
 		System.out.println("\n===== [MONSTER] =====");
-		for (int i = 0; i < monsterList.size(); i++) {
-			monsterList.get(i).printData();
+		for (int i = 0; i < GameManager.monsterList.size(); i++) {
+			GameManager.monsterList.get(i).printData();
 		}
 	}
 
@@ -132,41 +136,45 @@ public class StageBattle extends Stage {
 		System.out.println("    ❸ 가방");
 		System.out.println("└──────────────┘");
 		System.out.print("👉 ");
+		int size = GameManager.monsterList.size();
 		int sel = GameManager.sc.nextInt();
+		int idx = GameManager.rand.nextInt(size);
+		Unit monster = GameManager.monsterList.get(idx);
 		if (sel == ATTACK) {
 			while (true) {
-				int idx = GameManager.rand.nextInt(monsterList.size());
-
-				if (monsterList.get(idx).getHp() > 0) {
-					player.attack(monsterList.get(idx));
+				idx = GameManager.rand.nextInt(size);
+				monster = GameManager.monsterList.get(idx);
+				if (monster.getHp() > 0) {
+					player.attack(monster);
 					break;
 				}
 			}
 		} else if (sel == SKILL) {
-			selectPlayer();
+			player.skill(monster);
 		} else if (sel == INVENTORY) {
 			if (inventory()) {
 				System.out.println("┌────────────────┐");
 				System.out.println("  누구에게 줄까?");
 				System.out.println("└────────────────┘");
 
-				int idx = selectPlayer();
+				int playerIdx = selectPlayer();
 				System.out.println(GameManager.playerList.size());
-				while (idx < 0 || idx >= GameManager.playerList.size()) {
-					idx = selectPlayer();
+				while (playerIdx < 0 || playerIdx >= GameManager.playerList.size()) {
+					playerIdx = selectPlayer();
 				}
 				
-				GameManager.playerList.get(idx).setHp();
-				int maxHp = GameManager.playerList.get(idx).getMaxHp();
-				if (GameManager.playerList.get(idx).getHp() > maxHp)
-					GameManager.playerList.get(idx).setHp(maxHp);
+				Player healPlayer = GameManager.playerList.get(playerIdx);
+				healPlayer.setHp();
+				int maxHp = healPlayer.getMaxHp();
+				if (healPlayer.getHp() > maxHp)
+					healPlayer.setHp(maxHp);
 
 			}
 		}
 	}
 
 	public void monster_attack(int index) {
-		Unit monster = monsterList.get(index);
+		Unit monster = GameManager.monsterList.get(index);
 		if (monster.getHp() <= 0)
 			return;
 		while (true) {
@@ -180,6 +188,7 @@ public class StageBattle extends Stage {
 
 	public void check_live() {
 		int num = 0;
+		int size = GameManager.monsterList.size();
 		for (int i = 0; i < GameManager.playerList.size(); i++) {
 			if (GameManager.playerList.get(i).getHp() <= 0)
 				num++;
@@ -187,11 +196,11 @@ public class StageBattle extends Stage {
 		playerDead = GameManager.playerList.size() - num;
 
 		num = 0;
-		for (int i = 0; i < monsterList.size(); i++) {
-			if (monsterList.get(i).getHp() <= 0)
+		for (int i = 0; i < size; i++) {
+			if (GameManager.monsterList.get(i).getHp() <= 0)
 				num++;
 		}
-		monsterDead = monsterList.size() - num;
+		monsterDead = size - num;
 	}
 
 	public int selectPlayer() {

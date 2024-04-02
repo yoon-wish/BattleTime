@@ -42,6 +42,10 @@ public abstract class Unit {
 		return this.hp;
 	}
 	
+	public int getPower() {
+		return this.power;
+	}
+	
 	// 포션 섭취시
 	public void setHp() {
 		this.hp += 200; 
@@ -53,12 +57,14 @@ public abstract class Unit {
 	
 	public void attack(Unit target) {
 		target.hp -= power;
-		System.out.printf("🧨[%s](이)가 [%s]에게 %d의 데미지를 입힙니다.\n", this.name, target.name, power);
+		System.out.printf("🧨[%s](이)가 [%s]에게 %d의 데미지를 입힙니다.", this.name, target.name, power);
 		if(target.hp <= 0) {
 			target.hp = 0;
 			System.out.printf("[%s]를 처치했습니다.\n", target.name);
 		}
 	}
+	
+	
 	
 	public void printData() {
 		double temp = hp;
