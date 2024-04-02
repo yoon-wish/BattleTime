@@ -11,8 +11,8 @@ public class GameManager {
 	public static Random rand = new Random();
 	public static String nextStage = "";
 	
-	public static UnitManager unitManager = new UnitManager();
-	public static FileManager fileManager = new FileManager();
+	public static UnitManager unitManager;
+	public static FileManager fileManager;
 	public static ArrayList<Player> playerList;
 	public static ArrayList<Unit> monsterList;
 	
@@ -22,10 +22,23 @@ public class GameManager {
 	public static int battleNum;	// 하루 배틀 횟수 제한
 	public static int ranHp;		// 몬스터 Hp
 	public static int ranPower;		// 몬스터 power
+	public static int maxSp;		// 플레이어 최대 스킬포인트
 	
 	private Map<String, Stage> stageList = new HashMap<String, Stage>();
 	
 	public GameManager() {
+		battleNum = 1;
+		
+		// 기본 값 부여
+		ranHp = 8;
+		ranPower = 60;
+		day = 1;
+		coin = 100;
+		maxSp = 1;
+
+		unitManager = new UnitManager();
+		fileManager = new FileManager();
+		
 		playerList = null;
 		playerList = UnitManager.player_list;
 		stageList.put("TITLE", new StageTitle());
@@ -35,22 +48,13 @@ public class GameManager {
 		stageList.put("STORE", new StageStore());
 		stageList.put("HOUSE", new StageHouse());
 		
-		battleNum = 1;
-		
-		// 기본 값 부여
-		ranHp = 8;
-		ranPower = 60;
-//		ranPower = 500;
-		day = 1;
-		coin = 100;
-		
 		nextStage = "TITLE";
 
 		setGame();
 	}
 	
 	private void setGame() {
-		// 날짜/포션/코인/몬스터Hp
+		// 날짜/포션/코인/몬스터Hp/몬스터Power/플레이어sp
 		String info = fileManager.load();
 		if(info == "") {
 			return;
@@ -61,7 +65,9 @@ public class GameManager {
 		day = Integer.parseInt(allInfo[0]);
 		potion = Integer.parseInt(allInfo[1]);
 		coin = Integer.parseInt(allInfo[2]);
-		ranHp = Integer.parseInt(allInfo[3].trim());
+		ranHp = Integer.parseInt(allInfo[3]);
+		ranPower = Integer.parseInt(allInfo[4]);
+		maxSp = Integer.parseInt(allInfo[5].trim());
 	}
 	
 	public boolean changeStage() {

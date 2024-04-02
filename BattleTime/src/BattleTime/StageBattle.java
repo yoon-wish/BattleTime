@@ -8,7 +8,7 @@ public class StageBattle extends Stage {
 
 	private int playerDead = 0;
 	private int monsterDead = 0;
-	
+
 	public static boolean allDead;
 
 	@Override
@@ -20,6 +20,10 @@ public class StageBattle extends Stage {
 		boolean turn = true;
 
 		while (run) {
+			try {
+				Thread.sleep(700);
+			} catch (Exception e) {
+			}
 			if (turn) {
 				print_character();
 				if (player_idx < GameManager.playerList.size()) {
@@ -43,6 +47,7 @@ public class StageBattle extends Stage {
 			check_live();
 			if (monsterDead <= 0 || playerDead <= 0)
 				break;
+
 		}
 
 		if (monsterDead <= 0) {
@@ -54,7 +59,7 @@ public class StageBattle extends Stage {
 			playerDead();
 			GameManager.nextStage = "HOUSE";
 		}
-		
+
 		return false;
 	}
 
@@ -67,26 +72,45 @@ public class StageBattle extends Stage {
 			monsterDead = GameManager.monsterList.size();
 			playerDead = GameManager.playerList.size();
 		} else {
-			for(int i=0; i<GameManager.monsterList.size(); i++) {
+			for (int i = 0; i < GameManager.monsterList.size(); i++) {
 				Unit monster = GameManager.monsterList.get(i);
 				monster.setHp(monster.getMaxHp());
 			}
 		}
 	}
-	
+
 	private void monsterDead() {
+
+		getCoin();
+
+		int ran = GameManager.rand.nextInt(10);
+		if(ran == 0) {
+			getSp();
+		}
+		
+		GameManager.battleNum--;
+		GameManager.ranHp += 3; // 배틀 승리로 몬스터 체력 상승
+		GameManager.ranPower += 10; // 배틀 승리로 몬스터 파워 상승
+	}
+	
+	private void getCoin() {
 		int coin = GameManager.rand.nextInt(100) + 200;
 		System.out.println("┌────────────────────────────┐");
 		System.out.println("   배틀에서 승리했다");
 		System.out.printf("   보상으로 %d 코인 획득!\n", coin);
 		System.out.println("└────────────────────────────┘");
-
-		GameManager.battleNum--;
+		
 		GameManager.coin += coin;
-		GameManager.ranHp += 3; // 배틀 승리로 몬스터 체력 상승
-		GameManager.ranPower += 10; // 배틀 승리로 몬스터 파워 상승
 	}
 	
+	private void getSp() {
+		GameManager.maxSp ++;
+		System.out.println("┌───────────────────────────────────────┐");
+		System.out.println("   스킬 포인트가 영구히 1 증가했다 !!!");
+		System.out.println("   스킬 포인트: " + GameManager.maxSp);
+		System.out.println("└───────────────────────────────────────┘");
+	}
+
 	private void playerDead() {
 		int coin = GameManager.rand.nextInt(100) + 50;
 		int temp = GameManager.coin;
@@ -133,15 +157,20 @@ public class StageBattle extends Stage {
 		while (playerIdx < 0 || playerIdx >= GameManager.playerList.size()) {
 			playerIdx = selectPlayer();
 		}
-		
+
 		Player healPlayer = GameManager.playerList.get(playerIdx);
 		healPlayer.setHp();
 		int maxHp = healPlayer.getMaxHp();
 		if (healPlayer.getHp() > maxHp)
 			healPlayer.setHp(maxHp);
 	}
-	
+
 	private void printPlayer(Player player) {
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+		}
+		System.out.println();
 		System.out.println("┌──────────────┐");
 		System.out.println("    🤴🏻" + player.getName() + "");
 		System.out.println("└──────────────┘");
@@ -152,14 +181,14 @@ public class StageBattle extends Stage {
 		System.out.println("└──────────────┘");
 		System.out.print("👉 ");
 	}
-	
+
 	public void player_attack(int index) {
 		Player player = GameManager.playerList.get(index);
 		if (player.getHp() <= 0)
 			return;
 
 		printPlayer(player);
-		
+
 		int size = GameManager.monsterList.size();
 		int sel = GameManager.sc.nextInt();
 		int idx = GameManager.rand.nextInt(size);
@@ -174,7 +203,16 @@ public class StageBattle extends Stage {
 				}
 			}
 		} else if (sel == SKILL) {
-			player.skill(monster);
+			System.out.println();
+			if (player.getSp() > 0) {
+				player.skill(monster);
+				player.setSp();
+				System.out.println("\n남은 스킬 포인트: " + player.getSp());
+			} else {
+				System.out.println("┌──────────────────────────────┐");
+				System.out.println("  더이상 스킬을 쓸 수 없다....");
+				System.out.println("└──────────────────────────────┘");
+			}
 		} else if (sel == INVENTORY) {
 			if (inventory()) {
 				givePotion();
@@ -220,20 +258,24 @@ public class StageBattle extends Stage {
 		System.out.println("└──────────────┘");
 		System.out.print("👉 ");
 		int index = (GameManager.sc.nextInt()) - 1;
-		
+
 		return index;
 	}
 
 	public boolean inventory() {
 		System.out.println();
-		
-		if(GameManager.potion == 0) {
+
+		if (GameManager.potion == 0) {
 			System.out.println("┌──────┐");
 			System.out.println("  텅 - ");
 			System.out.println("└──────┘");
+			try {
+				Thread.sleep(700);
+			} catch (Exception e) {
+			}
 			return false;
 		}
-		
+
 		System.out.println("┌─────────────────────────────┐");
 		System.out.println("  보유 물약: " + GameManager.potion + "개");
 		System.out.println("  사용하시겠습니까? (y/n)");

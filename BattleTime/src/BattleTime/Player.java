@@ -2,8 +2,19 @@ package BattleTime;
 
 public class Player extends Unit {
 	
+	private int sp;
+	
 	Player(String name, int maxHp, int power){
 		super(name, maxHp, power);
+		this.sp = GameManager.maxSp;
+	}
+	
+	public int getSp() {
+		return this.sp;
+	}
+	
+	public void setSp() {
+		this.sp--;
 	}
 	
 	public int getHp() {
