@@ -155,16 +155,18 @@ public class StageBattle extends Stage {
 		System.out.println("└────────────────┘");
 
 		int playerIdx = selectPlayer();
-		System.out.println(GameManager.playerList.size());
 		while (playerIdx < 0 || playerIdx >= GameManager.playerList.size()) {
 			playerIdx = selectPlayer();
 		}
 
 		Player healPlayer = GameManager.playerList.get(playerIdx);
+		int temp = healPlayer.getHp();
 		healPlayer.setHp();
 		int maxHp = healPlayer.getMaxHp();
 		if (healPlayer.getHp() > maxHp)
 			healPlayer.setHp(maxHp);
+		temp = healPlayer.getHp() - temp;
+		System.out.printf("[%s]의 체력이 %d만큼 회복되었습니다.\n", healPlayer.getName(), temp);
 	}
 
 	private void printPlayer(Player player) {

@@ -31,7 +31,7 @@ public class GameManager {
 		
 		// 기본 값 부여
 		ranHp = 3;
-		ranPower = 600;
+		ranPower = 60;
 		day = 1;
 		coin = 100;
 		maxSp = 1;
