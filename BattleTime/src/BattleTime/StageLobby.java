@@ -5,7 +5,8 @@ public class StageLobby extends Stage {
 	private final int BATTLE = 2;
 	private final int SAVE = 3;
 	private final int EXIT = 4;
-
+	private boolean isSave;
+	
 	@Override
 	public boolean update() {
 		System.out.println("┌──────────────┐");
@@ -25,7 +26,7 @@ public class StageLobby extends Stage {
 		if (sel == VILLAGE)
 			GameManager.nextStage = "VILLAGE";
 		else if (sel == BATTLE) {
-			
+
 			if (GameManager.battleNum == 0) {
 				System.out.println("┌────────────────────────────────────┐");
 				System.out.println("   오늘 이미 전투를 치뤘다");
@@ -34,33 +35,40 @@ public class StageLobby extends Stage {
 				System.out.println("└────────────────────────────────────┘");
 				GameManager.nextStage = "LOBBY";
 			} else {
-				if(StageBattle.allDead) {
+				if (StageBattle.allDead) {
 					System.out.println("┌────────────────────────────────────┐");
 					System.out.println("   다들 지친 상태이다");
 					System.out.println("   휴식을 취하고 다시 도전하자");
 					System.out.println("└────────────────────────────────────┘");
 					GameManager.nextStage = "LOBBY";
-				} else 
+				} else
 					GameManager.nextStage = "BATTLE";
 			}
-			
+
 		} else if (sel == SAVE) {
-			GameManager.day += 1;
-			GameManager.fileManager.save(saveInfo());
+			if (GameManager.battleNum == 0 && !isSave) {
+				GameManager.day += 1;
+				this.isSave = true;
+				GameManager.fileManager.save(saveInfo());
+			} else if(GameManager.battleNum == 0 && isSave) 
+				System.out.println("이미 저장했습니다.");
+			else
+				GameManager.fileManager.save(saveInfo());
+			
 			GameManager.nextStage = "LOBBY";
 		} else if (sel == EXIT) {
 			System.out.println("종료하실건가요? (y/n)");
 			System.out.print("👉 ");
-			if(GameManager.sc.next().equals("y")) {
+			if (GameManager.sc.next().equals("y")) {
 				System.out.println("아 참, 저장은 하셨나요? (y/n)");
 				System.out.print("👉 ");
-				if(GameManager.sc.next().equals("y")) {
+				if (GameManager.sc.next().equals("y")) {
 					System.out.println("다음에 다시 만나요 ~");
 					GameManager.nextStage = "";
 				} else {
 					System.out.println("저장부터 하자....");
 					GameManager.nextStage = "LOBBY";
-				} 
+				}
 			} else {
 				System.out.println("조금 더 둘러보자...");
 				GameManager.nextStage = "LOBBY";
@@ -78,9 +86,8 @@ public class StageLobby extends Stage {
 
 	private String saveInfo() {
 		// 날짜/포션/코인/몬스터Hp/몬스터Power/플레이어sp
-		return GameManager.day + "/" + GameManager.potion + "/" + 
-				GameManager.coin + "/" + GameManager.ranHp + GameManager.ranPower + "/" +
-				GameManager.maxSp;
+		return GameManager.day + "/" + GameManager.potion + "/" + GameManager.coin + "/" + GameManager.ranHp + "/"
+				+ GameManager.ranPower + "/" + GameManager.maxSp;
 	}
 
 }

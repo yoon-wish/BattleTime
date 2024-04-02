@@ -21,7 +21,7 @@ public class StageBattle extends Stage {
 
 		while (run) {
 			try {
-				Thread.sleep(500);
+				Thread.sleep(700);
 			} catch (Exception e) {
 			}
 			if (turn) {

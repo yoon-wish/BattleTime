@@ -7,7 +7,7 @@ public class UnitManager {
 	public static ArrayList<Player> player_list;
 	
 	private String path = "BattleTime.Unit";
-	private String monNames[] = { "Bat", "Dra", "Troll" };
+	private String monNames[] = { "Bat", "Orc", "Troll" };
 	
 	public UnitManager() {
 		monster_list = new ArrayList<>();
