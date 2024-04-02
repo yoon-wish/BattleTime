@@ -17,7 +17,7 @@ public class StageLobby extends Stage {
 		System.out.print("👉 ");
 		int sel = GameManager.sc.nextInt();
 
-		while (!((sel == VILLAGE) || (sel == BATTLE) || (sel == EXIT))) {
+		while (!((sel == VILLAGE) || (sel == BATTLE) || (sel == SAVE) || (sel == EXIT))) {
 			System.out.print("👉 ");
 			sel = GameManager.sc.nextInt();
 		}
@@ -25,6 +25,7 @@ public class StageLobby extends Stage {
 		if (sel == VILLAGE)
 			GameManager.nextStage = "VILLAGE";
 		else if (sel == BATTLE) {
+			
 			if (GameManager.battleNum == 0) {
 				System.out.println("┌────────────────────────────────────┐");
 				System.out.println("   오늘 이미 전투를 치뤘다");
@@ -32,8 +33,17 @@ public class StageLobby extends Stage {
 				System.out.println("   휴식을 취하고 다음 날 다시 오자");
 				System.out.println("└────────────────────────────────────┘");
 				GameManager.nextStage = "LOBBY";
-			} else
-				GameManager.nextStage = "BATTLE";
+			} else {
+				if(StageBattle.allDead) {
+					System.out.println("┌────────────────────────────────────┐");
+					System.out.println("   다들 지친 상태이다");
+					System.out.println("   휴식을 취하고 다시 도전하자");
+					System.out.println("└────────────────────────────────────┘");
+					GameManager.nextStage = "LOBBY";
+				} else 
+					GameManager.nextStage = "BATTLE";
+			}
+			
 		} else if (sel == SAVE) {
 			GameManager.day += 1;
 			GameManager.fileManager.save(saveInfo());

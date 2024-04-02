@@ -9,8 +9,10 @@ public class StageBattle extends Stage {
 	private final int INVENTORY = 3;
 
 	private ArrayList<Unit> monsterList;
-	int monsterDead = 0;
-	int playerDead = 0;
+	private int playerDead = 0;
+	private int monsterDead = 0;
+	
+	public static boolean allDead;
 
 	@Override
 	public boolean update() {
@@ -40,21 +42,67 @@ public class StageBattle extends Stage {
 					monster_idx = 0;
 				}
 			}
+
 			check_live();
 			if (monsterDead <= 0 || playerDead <= 0)
 				break;
 		}
-		GameManager.nextStage = "LOBBY";
+
+		if (monsterDead <= 0) {
+			int coin = GameManager.rand.nextInt(100) + 200;
+			System.out.println("┌────────────────────────────┐");
+			System.out.println("   배틀에서 승리했다");
+			System.out.printf("   보상으로 %d 코인 획득!\n", coin);
+			System.out.println("└────────────────────────────┘");
+
+			GameManager.battleNum--;
+			GameManager.coin += coin;
+			GameManager.ranHp += 3; // 배틀 승리로 몬스터 체력 상승
+			GameManager.ranPower += 10; // 배틀 승리로 몬스터 파워 상승
+
+			GameManager.nextStage = "LOBBY";
+		}
+
+		if (playerDead <= 0) {
+			int coin = GameManager.rand.nextInt(100) + 50;
+			allDead = true;
+			try {
+				System.out.println("┌────────────────────────────┐");
+				Thread.sleep(500);
+				System.out.println("   배틀에서 패배했다");
+				Thread.sleep(500);
+				System.out.printf("   %d 코인을 빼앗겼다!\n", coin);
+				Thread.sleep(500);
+				System.out.println("   눈 앞이 캄캄해졌다...!");
+				Thread.sleep(500);
+				System.out.println("   일단 아지트로 가자...");
+				System.out.println("└────────────────────────────┘");
+			} catch (Exception e) {
+			}
+
+			GameManager.coin -= coin;
+			if (GameManager.coin < 0) {
+				GameManager.coin = 0;
+			}
+
+			GameManager.nextStage = "HOUSE";
+		}
 		return false;
 	}
 
 	@Override
 	public void init() {
-		GameManager.unitManager.monster_rand_set(4);
-		monsterList = null;
-		monsterList = UnitManager.monster_list;
-		monsterDead = monsterList.size();
-		playerDead = GameManager.playerList.size();
+		if (monsterList == null) {
+			GameManager.unitManager.monster_rand_set(4);
+			monsterList = null;
+			monsterList = UnitManager.monster_list;
+			monsterDead = monsterList.size();
+			playerDead = GameManager.playerList.size();
+		} else {
+			for(int i=0; i<monsterList.size(); i++) {
+				monsterList.get(i).setHp(monsterList.get(i).getMaxHp());
+			}
+		}
 	}
 
 	void print_character() {
@@ -98,13 +146,13 @@ public class StageBattle extends Stage {
 				System.out.println("┌────────────────┐");
 				System.out.println("  누구에게 줄까?");
 				System.out.println("└────────────────┘");
-				
+
 				int idx = selectPlayer();
 				GameManager.playerList.get(idx).setHp();
 				int maxHp = GameManager.playerList.get(idx).getMaxHp();
-				if(GameManager.playerList.get(idx).getHp() > maxHp)
+				if (GameManager.playerList.get(idx).getHp() > maxHp)
 					GameManager.playerList.get(idx).setHp(maxHp);
-					
+
 			}
 		}
 	}

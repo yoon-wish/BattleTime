@@ -25,20 +25,15 @@ public class StageHouse extends Stage{
 			System.out.println("잠에 들건가요? (y/n)");
 			System.out.print("👉 ");
 			if(GameManager.sc.next().equals("y")) {
-				System.out.println("아 참, 저장은 하셨나요? (y/n)");
-				System.out.print("👉 ");
-				if(GameManager.sc.next().equals("y")) {
-					System.out.println("다음 날 다시 만나요 ~");
-					GameManager.nextStage = "";
-				} else {
-					System.out.println("저장하고 자야겠다....");
-					GameManager.nextStage = "LOBBY";
-				} 
-			} else {
-				System.out.println("조금 더 깨어있자...");
-				GameManager.nextStage = "LOBBY";
+				for(int i=0; i<GameManager.playerList.size(); i++) {
+					Player player = GameManager.playerList.get(i);
+					player.setHp(player.getMaxHp());
+				}
+				StageBattle.allDead = false;
+				System.out.println("모든 길드원들이 체력을 회복했다!!!");
 			}
 			
+			GameManager.nextStage = "HOUSE";
 		} else if(sel == WALLET) {
 			System.out.println("┌────────────────────────────┐");
 			System.out.println("   보유 코인: " + GameManager.coin + " coin");
