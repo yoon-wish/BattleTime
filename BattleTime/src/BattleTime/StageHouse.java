@@ -4,7 +4,7 @@ public class StageHouse extends Stage{
 
 	private final int SLEEP = 1;
 	private final int WALLET = 2;
-	private final int VILLAGE = 1;
+	private final int VILLAGE = 3;
 	
 	@Override
 	public boolean update() {
@@ -16,7 +16,7 @@ public class StageHouse extends Stage{
 		System.out.print("👉 ");
 		int sel = GameManager.sc.nextInt();
 		
-		while (!((sel == SLEEP) || (sel == WALLET))) {
+		while (!((sel == SLEEP) || (sel == WALLET) || (sel == VILLAGE))) {
 			System.out.print("👉 ");
 			sel = GameManager.sc.nextInt();
 		}
