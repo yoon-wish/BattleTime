@@ -34,7 +34,7 @@ public class StageStore extends Stage {
 				System.out.println("   개수는 " + this.potion + "개야");
 				Thread.sleep(500);
 				System.out.println("   구매하겠는가?");
-				System.out.println("└─────────────────────────────┘");
+				System.out.println("└────────────────────────────────────┘");
 			}
 		} catch (Exception e) {
 		}
