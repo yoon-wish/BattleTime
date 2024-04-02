@@ -73,7 +73,7 @@ public class StageBattle extends Stage {
 		if (player.getHp() <= 0)
 			return;
 		System.out.println("┌──────────────┐");
-		System.out.println("     " + player.getName() + "");
+		System.out.println("    🤴🏻" + player.getName() + "");
 		System.out.println("└──────────────┘");
 		System.out.println("┌──────────────┐");
 		System.out.println("    ❶ 어택");
@@ -95,6 +95,10 @@ public class StageBattle extends Stage {
 			selectPlayer();
 		} else if (sel == INVENTORY) {
 			if (inventory()) {
+				System.out.println("┌────────────────┐");
+				System.out.println("  누구에게 줄까?");
+				System.out.println("└────────────────┘");
+				
 				int idx = selectPlayer();
 				GameManager.playerList.get(idx).setHp();
 				int maxHp = GameManager.playerList.get(idx).getMaxHp();
@@ -135,9 +139,6 @@ public class StageBattle extends Stage {
 	}
 
 	public int selectPlayer() {
-		System.out.println("┌────────────────┐");
-		System.out.println("  누구에게 줄까?");
-		System.out.println("└────────────────┘");
 		System.out.println("┌──────────────┐");
 		for (int i = 0; i < GameManager.playerList.size(); i++) {
 			System.out.printf("    %d) %s\n", i + 1, GameManager.playerList.get(i).getName());
