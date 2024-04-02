@@ -86,6 +86,10 @@ public class Player extends Unit {
 		for(int i=0; i<GameManager.playerList.size(); i++) {
 			Player player = GameManager.playerList.get(i);
 			double heal = player.getMaxHp() * 0.3;
+			if(player.getHp() == 0) {
+				return;
+			}
+			
 			if(player.getHp() + heal > player.getMaxHp()) {
 				heal = player.getMaxHp() - player.getHp();
 			}
