@@ -35,12 +35,26 @@ public class StageLobby extends Stage {
 			} else
 				GameManager.nextStage = "BATTLE";
 		} else if (sel == SAVE) {
+			GameManager.day += 1;
 			GameManager.fileManager.save(saveInfo());
 			GameManager.nextStage = "LOBBY";
 		} else if (sel == EXIT) {
-			GameManager.day += 1;
-			GameManager.fileManager.save(saveInfo());
-			GameManager.nextStage = "";
+			System.out.println("종료하실건가요? (y/n)");
+			System.out.print("👉 ");
+			if(GameManager.sc.next().equals("y")) {
+				System.out.println("아 참, 저장은 하셨나요? (y/n)");
+				System.out.print("👉 ");
+				if(GameManager.sc.next().equals("y")) {
+					System.out.println("다음에 다시 만나요 ~");
+					GameManager.nextStage = "";
+				} else {
+					System.out.println("저장부터 하자....");
+					GameManager.nextStage = "LOBBY";
+				} 
+			} else {
+				System.out.println("조금 더 둘러보자...");
+				GameManager.nextStage = "LOBBY";
+			}
 		}
 
 		return false;

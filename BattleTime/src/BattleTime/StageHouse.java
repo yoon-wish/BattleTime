@@ -21,7 +21,23 @@ public class StageHouse extends Stage{
 			sel = GameManager.sc.nextInt();
 		}
 		
-		if(sel == SLEEP) {
+		if(sel == SLEEP) {			
+			System.out.println("잠에 들건가요? (y/n)");
+			System.out.print("👉 ");
+			if(GameManager.sc.next().equals("y")) {
+				System.out.println("아 참, 저장은 하셨나요? (y/n)");
+				System.out.print("👉 ");
+				if(GameManager.sc.next().equals("y")) {
+					System.out.println("다음 날 다시 만나요 ~");
+					GameManager.nextStage = "";
+				} else {
+					System.out.println("저장하고 자야겠다....");
+					GameManager.nextStage = "LOBBY";
+				} 
+			} else {
+				System.out.println("조금 더 깨어있자...");
+				GameManager.nextStage = "LOBBY";
+			}
 			
 		} else if(sel == WALLET) {
 			System.out.println("┌────────────────────────────┐");
