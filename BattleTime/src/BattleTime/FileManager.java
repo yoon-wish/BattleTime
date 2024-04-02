@@ -25,9 +25,9 @@ public class FileManager {
 			fw.write(info);
 			fw.close();
 
-			System.out.println("게임저장 성공");
+			System.out.println("GAME SAVED");
 		} catch (IOException e) {
-			System.err.println("게임저장 실패");
+			System.err.println("GAME SAVE FAILED");
 		}
 	}
 
@@ -46,9 +46,9 @@ public class FileManager {
 				fr.close();
 				br.close();
 
-				System.out.println("게임로드 성공");
+				System.out.println("GAME LOADED.");
 			} catch (IOException e) {
-				System.err.println("게임로드 실패");
+				System.err.println("GAME LOAD FAILED");
 			}
 		}
 
