@@ -34,6 +34,7 @@ public class StageLobby extends Stage {
 				GameManager.nextStage = "BATTLE";
 		}
 		else if (sel == EXIT)
+			GameManager.fileManager.save(saveInfo());
 			GameManager.nextStage = "";
 
 		return false;
@@ -43,6 +44,11 @@ public class StageLobby extends Stage {
 	public void init() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private String saveInfo() {
+		// 날짜/포션/코인/몬스터Hp
+		return GameManager.day + "/" + GameManager.potion + "/" + GameManager.coin + "/" + GameManager.ranHp;
 	}
 
 }
