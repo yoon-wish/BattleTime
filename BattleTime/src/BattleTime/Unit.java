@@ -53,7 +53,7 @@ public abstract class Unit {
 	
 	public void attack(Unit target) {
 		target.hp -= power;
-		System.out.printf("[%s](이)가 [%s]에게 %d의 데미지를 입힙니다.\n", this.name, target.name, power);
+		System.out.printf("🧨[%s](이)가 [%s]에게 %d의 데미지를 입힙니다.\n", this.name, target.name, power);
 		if(target.hp <= 0) {
 			target.hp = 0;
 			System.out.printf("[%s]를 처치했습니다.\n", target.name);
