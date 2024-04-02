@@ -14,7 +14,7 @@ public class GameManager {
 	public static UnitManager unitManager = new UnitManager();
 	public static ArrayList<Player> playerList;
 	public static int potion;	// 길드가 보유한 포션
-	public static int money;	// 길드가 보유한 돈
+	public static int coin;	// 길드가 보유한 돈
 	public static int battleNum;	// 하루 배틀 횟수 제한
 	
 	private Map<String, Stage> stageList = new HashMap<String, Stage>();
@@ -27,10 +27,11 @@ public class GameManager {
 		stageList.put("LOBBY", new StageLobby());
 		stageList.put("VILLAGE", new StageVillage());
 		stageList.put("STORE", new StageStore());
+		stageList.put("HOUSE", new StageHouse());
 		
 		potion = 0;
-		money = 100;
-		battleNum = 0;
+		coin = 100;
+		battleNum = 1;
 		nextStage = "TITLE";
 	}
 	
