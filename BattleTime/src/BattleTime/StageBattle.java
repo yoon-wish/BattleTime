@@ -34,10 +34,14 @@ public class StageBattle extends Stage {
 					player_idx = 0;
 				}
 			} else if (!turn) {
-				if (monster_idx < GameManager.monsterList.size()) {
+				int size = GameManager.monsterList.size();
+				if (monster_idx < size) {
 					System.out.println();
 					monster_attack(monster_idx);
 					monster_idx += 1;
+					if(monster_idx < size && GameManager.monsterList.get(monster_idx).getHp() == 0) {
+						monster_idx ++;
+					}
 				} else {
 					turn = !turn;
 					monster_idx = 0;
