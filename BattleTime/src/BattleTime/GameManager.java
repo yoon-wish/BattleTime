@@ -12,10 +12,15 @@ public class GameManager {
 	public static String nextStage = "";
 	
 	public static UnitManager unitManager = new UnitManager();
+	public static FileManager fileManager = new FileManager();
 	public static ArrayList<Player> playerList;
-	public static int potion;	// 길드가 보유한 포션
-	public static int coin;	// 길드가 보유한 돈
+	
+	public static int day;			// 날짜
+	public static int potion;		// 길드가 보유한 포션
+	public static int coin;			// 길드가 보유한 돈
 	public static int battleNum;	// 하루 배틀 횟수 제한
+	public static int ranHp;		// 몬스터 Hp
+	public static int ranPower;		// 몬스터 power
 	
 	private Map<String, Stage> stageList = new HashMap<String, Stage>();
 	
@@ -29,15 +34,35 @@ public class GameManager {
 		stageList.put("STORE", new StageStore());
 		stageList.put("HOUSE", new StageHouse());
 		
-		potion = 0;
-		coin = 100;
 		battleNum = 1;
+		
+		// 기본 값 부여
+		ranHp = 10;
+		ranPower = 80;
+		day = 1;
+		
 		nextStage = "TITLE";
+
+		setGame();
+	}
+	
+	private void setGame() {
+		// 날짜/포션/코인/몬스터Hp
+		String info = fileManager.load();
+		if(info == "") {
+			return;
+		}
+		String[] allInfo = info.split("/");
+		
+		day = Integer.parseInt(allInfo[0]);
+		potion = Integer.parseInt(allInfo[1]);
+		coin = Integer.parseInt(allInfo[2]);
+		ranHp = Integer.parseInt(allInfo[3]);
 	}
 	
 	public boolean changeStage() {
 		if(nextStage != "" && nextStage != "TITLE") {
-			System.out.printf("»»———— [%s] ————««\n", nextStage);
+			System.out.printf("»»——— [%s] ———««\n", nextStage);
 		}
 		
 		Stage stage = stageList.get(nextStage);

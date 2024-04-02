@@ -4,7 +4,7 @@ public class StageTitle extends Stage {
 
 	@Override
 	public boolean update() {
-		System.out.println(".｡*ﾟ+.*.｡ BATTLE TIME ﾟ+..｡*ﾟ+");
+		System.out.println("｡☆✼★━━━━━━ BATTLE TIME ━━━━━━★✼☆｡");
 		System.out.println("[시작]을 입력하세요.");
 		System.out.print("👉 ");
 		String start = GameManager.sc.next();
@@ -14,6 +14,7 @@ public class StageTitle extends Stage {
 			start = GameManager.sc.next();
 		}
 
+		System.out.printf("︵‿︵‿୨ << %d일차 >> ୧‿︵‿︵\n", GameManager.day);
 		GameManager.nextStage = "LOBBY";
 
 		return false;
