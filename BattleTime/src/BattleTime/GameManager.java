@@ -14,6 +14,7 @@ public class GameManager {
 	public static UnitManager unitManager = new UnitManager();
 	public static ArrayList<Player> playerList;
 	public static int potion;	// 길드가 보유한 포션
+	public static int money;	// 길드가 보유한 돈
 	
 	private String curStage = "";
 	private Map<String, Stage> stageList = new HashMap<String, Stage>();
@@ -28,6 +29,7 @@ public class GameManager {
 		stageList.put("STORE", new StageStore());
 		
 		potion = 0;
+		money = 100;
 		nextStage = "TITLE";
 	}
 	
