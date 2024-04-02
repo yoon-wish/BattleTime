@@ -37,9 +37,11 @@ public class GameManager {
 		battleNum = 1;
 		
 		// 기본 값 부여
-		ranHp = 10;
-		ranPower = 80;
+		ranHp = 8;
+//		ranPower = 60;
+		ranPower = 500;
 		day = 1;
+		coin = 100;
 		
 		nextStage = "TITLE";
 
@@ -52,12 +54,13 @@ public class GameManager {
 		if(info == "") {
 			return;
 		}
-		String[] allInfo = info.split("/");
 		
+		String[] allInfo = info.split("/");
+
 		day = Integer.parseInt(allInfo[0]);
 		potion = Integer.parseInt(allInfo[1]);
 		coin = Integer.parseInt(allInfo[2]);
-		ranHp = Integer.parseInt(allInfo[3]);
+		ranHp = Integer.parseInt(allInfo[3].trim());
 	}
 	
 	public boolean changeStage() {

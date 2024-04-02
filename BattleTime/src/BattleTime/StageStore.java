@@ -41,6 +41,7 @@ public class StageStore extends Stage {
 		}
 
 		System.out.println("주인이 구매 의사를 묻는다 (y/n)");
+		System.out.print("👉 ");
 		if (GameManager.sc.next().equals("y")) {
 			if (buyPotion()) {
 				System.out.println("기분 좋은 쇼핑이었다");
@@ -90,7 +91,7 @@ public class StageStore extends Stage {
 			number = GameManager.sc.nextInt();
 		}
 
-		if (number * PRICE > GameManager.money) {
+		if (number * PRICE > GameManager.coin) {
 			try {
 				System.out.println("┌───────────────────────────────┐");
 				Thread.sleep(500);

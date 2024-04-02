@@ -65,6 +65,13 @@ public class StageBattle extends Stage {
 
 		if (playerDead <= 0) {
 			int coin = GameManager.rand.nextInt(100) + 50;
+			int temp = GameManager.coin;
+			GameManager.coin -= coin;
+			if (GameManager.coin < 0) {
+				coin = temp;
+				GameManager.coin = 0;
+			}
+
 			allDead = true;
 			try {
 				System.out.println("┌────────────────────────────┐");
@@ -80,10 +87,6 @@ public class StageBattle extends Stage {
 			} catch (Exception e) {
 			}
 
-			GameManager.coin -= coin;
-			if (GameManager.coin < 0) {
-				GameManager.coin = 0;
-			}
 
 			GameManager.nextStage = "HOUSE";
 		}
