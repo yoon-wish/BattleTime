@@ -123,10 +123,25 @@ public class StageBattle extends Stage {
 		}
 	}
 
-	public void player_attack(int index) {
-		Player player = GameManager.playerList.get(index);
-		if (player.getHp() <= 0)
-			return;
+	private void givePotion() {
+		System.out.println("┌────────────────┐");
+		System.out.println("  누구에게 줄까?");
+		System.out.println("└────────────────┘");
+
+		int playerIdx = selectPlayer();
+		System.out.println(GameManager.playerList.size());
+		while (playerIdx < 0 || playerIdx >= GameManager.playerList.size()) {
+			playerIdx = selectPlayer();
+		}
+		
+		Player healPlayer = GameManager.playerList.get(playerIdx);
+		healPlayer.setHp();
+		int maxHp = healPlayer.getMaxHp();
+		if (healPlayer.getHp() > maxHp)
+			healPlayer.setHp(maxHp);
+	}
+	
+	private void printPlayer(Player player) {
 		System.out.println("┌──────────────┐");
 		System.out.println("    🤴🏻" + player.getName() + "");
 		System.out.println("└──────────────┘");
@@ -136,6 +151,15 @@ public class StageBattle extends Stage {
 		System.out.println("    ❸ 가방");
 		System.out.println("└──────────────┘");
 		System.out.print("👉 ");
+	}
+	
+	public void player_attack(int index) {
+		Player player = GameManager.playerList.get(index);
+		if (player.getHp() <= 0)
+			return;
+
+		printPlayer(player);
+		
 		int size = GameManager.monsterList.size();
 		int sel = GameManager.sc.nextInt();
 		int idx = GameManager.rand.nextInt(size);
@@ -153,22 +177,7 @@ public class StageBattle extends Stage {
 			player.skill(monster);
 		} else if (sel == INVENTORY) {
 			if (inventory()) {
-				System.out.println("┌────────────────┐");
-				System.out.println("  누구에게 줄까?");
-				System.out.println("└────────────────┘");
-
-				int playerIdx = selectPlayer();
-				System.out.println(GameManager.playerList.size());
-				while (playerIdx < 0 || playerIdx >= GameManager.playerList.size()) {
-					playerIdx = selectPlayer();
-				}
-				
-				Player healPlayer = GameManager.playerList.get(playerIdx);
-				healPlayer.setHp();
-				int maxHp = healPlayer.getMaxHp();
-				if (healPlayer.getHp() > maxHp)
-					healPlayer.setHp(maxHp);
-
+				givePotion();
 			}
 		}
 	}
