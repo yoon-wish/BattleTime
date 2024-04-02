@@ -13,9 +13,9 @@ public class UnitManager {
 		monster_list = new ArrayList<>();
 		player_list = new ArrayList<>();
 		
-		player_list.add(new Player("전사", 1000, 60));
-		player_list.add(new Player("마법사", 700, 50));
-		player_list.add(new Player("힐러", 500, 40));
+		player_list.add(new Player("전사", 1000, 100));
+		player_list.add(new Player("마법사", 700, 80));
+		player_list.add(new Player("힐러", 500, 50));
 	}
 	
 	public void monster_rand_set(int size) {
