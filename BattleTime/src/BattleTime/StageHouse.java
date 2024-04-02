@@ -28,9 +28,10 @@ public class StageHouse extends Stage{
 				for(int i=0; i<GameManager.playerList.size(); i++) {
 					Player player = GameManager.playerList.get(i);
 					player.setHp(player.getMaxHp());
+					player.setSp(GameManager.maxSp);
 				}
 				StageBattle.allDead = false;
-				System.out.println("모든 길드원들이 체력을 회복했다!!!");
+				System.out.println("모든 길드원들이 체력과 스킬포인트를 회복했다!!!");
 			}
 			
 			GameManager.nextStage = "HOUSE";

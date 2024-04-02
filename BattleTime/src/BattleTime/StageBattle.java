@@ -21,7 +21,7 @@ public class StageBattle extends Stage {
 
 		while (run) {
 			try {
-				Thread.sleep(700);
+				Thread.sleep(500);
 			} catch (Exception e) {
 			}
 			if (turn) {
@@ -198,7 +198,9 @@ public class StageBattle extends Stage {
 				idx = GameManager.rand.nextInt(size);
 				monster = GameManager.monsterList.get(idx);
 				if (monster.getHp() > 0) {
+					System.out.println();
 					player.attack(monster);
+					System.out.println();
 					break;
 				}
 			}

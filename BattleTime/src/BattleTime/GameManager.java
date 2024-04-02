@@ -30,7 +30,7 @@ public class GameManager {
 		battleNum = 1;
 		
 		// 기본 값 부여
-		ranHp = 8;
+		ranHp = 5;
 		ranPower = 60;
 		day = 1;
 		coin = 100;

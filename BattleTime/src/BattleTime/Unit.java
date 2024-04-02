@@ -78,7 +78,7 @@ public abstract class Unit {
 			hpBar[i] = MY_HP;
 		}
 		
-		System.out.printf("[%s] ", this.name);
+		System.out.printf("[%3s] ", this.name);
 		
 		for(int i=0; i<hpBar.length; i++) {
 			if(hpBar[i] == MY_HP)
