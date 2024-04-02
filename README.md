@@ -71,9 +71,20 @@
 <br>
 <br>
 > Demo
-
-![diagram]()
-
-> GAME CLEAR VERSION
-
-![diagram]()
+## 1일차
+**전투(전사, 마법사 스킬 사용), 상점, 저장**
+![gif](BattleTime/src/BattleTime/sorce/BattleTime_1일차.gif)
+<br>
+<br>
+## 2일차
+**전투(포션 사용), 승리시 재전투 불가능 확인**
+![gif](BattleTime/src/BattleTime/sorce/BattleTime_2일차.gif)
+<br>
+<br>
+### ▼ 10퍼센트의 확률로 스킬포인트가 영구적으로 1 증가합니다.
+![png](BattleTime/src/BattleTime/sorce/BattleTime_skillPoint.png)
+<br>
+<br>
+## 패배 엔딩
+**전투(힐러 스킬 사용), 취침**
+![gif](BattleTime/src/BattleTime/sorce/BattleTime_deadEnding.gif)
