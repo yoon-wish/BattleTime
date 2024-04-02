@@ -8,6 +8,8 @@ public class StageBattle extends Stage {
 
 	private int playerDead = 0;
 	private int monsterDead = 0;
+	
+	private int monster_idx = 0;
 
 	public static boolean allDead;
 
@@ -16,7 +18,6 @@ public class StageBattle extends Stage {
 		init();
 		boolean run = true;
 		int player_idx = 0;
-		int monster_idx = 0;
 		boolean turn = true;
 
 		while (run) {
@@ -37,11 +38,8 @@ public class StageBattle extends Stage {
 				int size = GameManager.monsterList.size();
 				if (monster_idx < size) {
 					System.out.println();
-					monster_attack(monster_idx);
+					monster_attack();
 					monster_idx += 1;
-					if(monster_idx < size && GameManager.monsterList.get(monster_idx).getHp() == 0) {
-						monster_idx ++;
-					}
 				} else {
 					turn = !turn;
 					monster_idx = 0;
@@ -226,8 +224,20 @@ public class StageBattle extends Stage {
 		}
 	}
 
-	public void monster_attack(int index) {
-		Unit monster = GameManager.monsterList.get(index);
+	public void monster_attack() {
+		int size = GameManager.monsterList.size();
+		
+		while(monster_idx<size) {
+			if(GameManager.monsterList.get(monster_idx).getHp() == 0) {
+				monster_idx += 1;
+				if(monster_idx == size) {
+					return;
+				}
+			} else
+				break;
+		}
+		
+		Unit monster = GameManager.monsterList.get(monster_idx);
 		if (monster.getHp() <= 0)
 			return;
 		while (true) {

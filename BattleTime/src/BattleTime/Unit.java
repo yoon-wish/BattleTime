@@ -60,7 +60,7 @@ public abstract class Unit {
 		System.out.printf("🧨[%s](이)가 [%s]에게 %d의 데미지를 입힙니다.", this.name, target.name, power);
 		if(target.hp <= 0) {
 			target.hp = 0;
-			System.out.printf("[%s]를 처치했습니다.\n", target.name);
+			System.out.printf("\n[%s]를 처치했습니다.\n", target.name);
 		}
 	}
 	
