@@ -151,6 +151,11 @@ public class StageBattle extends Stage {
 				System.out.println("└────────────────┘");
 
 				int idx = selectPlayer();
+				System.out.println(GameManager.playerList.size());
+				while (idx < 0 || idx >= GameManager.playerList.size()) {
+					idx = selectPlayer();
+				}
+				
 				GameManager.playerList.get(idx).setHp();
 				int maxHp = GameManager.playerList.get(idx).getMaxHp();
 				if (GameManager.playerList.get(idx).getHp() > maxHp)
@@ -195,17 +200,28 @@ public class StageBattle extends Stage {
 			System.out.printf("    %d) %s\n", i + 1, GameManager.playerList.get(i).getName());
 		}
 		System.out.println("└──────────────┘");
+		System.out.print("👉 ");
 		int index = (GameManager.sc.nextInt()) - 1;
+		
 		return index;
 	}
 
 	public boolean inventory() {
 		System.out.println();
+		
+		if(GameManager.potion == 0) {
+			System.out.println("┌──────┐");
+			System.out.println("  텅 - ");
+			System.out.println("└──────┘");
+			return false;
+		}
+		
 		System.out.println("┌─────────────────────────────┐");
 		System.out.println("  보유 물약: " + GameManager.potion + "개");
 		System.out.println("  사용하시겠습니까? (y/n)");
 		System.out.println("└─────────────────────────────┘");
 
+		System.out.print("👉 ");
 		if (GameManager.sc.next().equals("y")) {
 			return true;
 		}
