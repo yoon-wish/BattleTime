@@ -15,8 +15,8 @@ public class GameManager {
 	public static ArrayList<Player> playerList;
 	public static int potion;	// 길드가 보유한 포션
 	public static int money;	// 길드가 보유한 돈
+	public static int battleNum;	// 하루 배틀 횟수 제한
 	
-	private String curStage = "";
 	private Map<String, Stage> stageList = new HashMap<String, Stage>();
 	
 	public GameManager() {
@@ -30,6 +30,7 @@ public class GameManager {
 		
 		potion = 0;
 		money = 100;
+		battleNum = 0;
 		nextStage = "TITLE";
 	}
 	
@@ -38,11 +39,7 @@ public class GameManager {
 			System.out.printf("»»———— [%s] ————««\n", nextStage);
 		}
 		
-		if(curStage.equals(nextStage))
-			return true;
-		
-		curStage = nextStage;
-		Stage stage = stageList.get(curStage);
+		Stage stage = stageList.get(nextStage);
 		
 		boolean run = true;
 		while(true) {
@@ -53,7 +50,7 @@ public class GameManager {
 		
 		if(nextStage.equals(""))
 			return false;
-		else
+		else 
 			return true;
 	}
 }
