@@ -81,10 +81,10 @@
 ![gif](BattleTime/src/BattleTime/sorce/BattleTime_2일차.gif)
 <br>
 <br>
-### ▼ 10퍼센트의 확률로 스킬포인트가 영구적으로 1 증가합니다.
-![png](BattleTime/src/BattleTime/sorce/BattleTime_skillPoint.png)
+#### ▼ 10퍼센트의 확률로 스킬포인트가 영구적으로 1 증가합니다.
+<img src="BattleTime/src/BattleTime/sorce/BattleTime_skillPoint.png" width="400"/>
 <br>
-<br>
+
 ## 패배 엔딩
 **전투(힐러 스킬 사용), 취침**
 ![gif](BattleTime/src/BattleTime/sorce/BattleTime_deadEnding.gif)
