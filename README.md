@@ -10,8 +10,9 @@
 > 게임 설명
 
 ▼ 길드<br>
-- 전사, 마법사, 힐러 3명으로 구성된 길드입니다.
-- 각 길드원은 공격력과 스킬 포인트를 가지고 있습니다.
+- 전사, 마법사, 힐러 중 3명의 길드원을 선택해 길드를 꾸립니다.
+- 각 직업은 서로 다른 공격력과 Hp를 가지고 있습니다. 
+- 각 직업은 스킬 포인트를 가지고 있습니다.
   - 스킬
       - 전사: <<죽음의 일격>> 한 몬스터에게 공격력 2배의 피해를 입힙니다.
       - 마법사: <<마법의 태풍>> 모든 몬스터에게 공격력 1/2의 피해를 입힙니다.
@@ -69,7 +70,7 @@
 ### Stage
 ![Diagram](BattleTime/src/BattleTime/sorce/BattleTime_Stage.jpg)
 ### Unit
-![Diagram](BattleTime/src/BattleTime/sorce/BattleTime_Unit.jpg)
+![Diagram](BattleTime/src/BattleTime/sorce/BattleTime_Unit_Update.jpg)
 
 <br>
 <br>
