@@ -1,6 +1,6 @@
 package BattleTime;
 
-public interface PlayerSkill {
+public interface SkillAble {
 	public void skill();
 	public void skill(Unit unit);
 }

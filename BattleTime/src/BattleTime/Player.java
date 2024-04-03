@@ -1,6 +1,6 @@
 package BattleTime;
 
-public class Player extends Unit implements PlayerSkill{
+public class Player extends Unit implements SkillAble{
 	
 	private int sp;
 	
