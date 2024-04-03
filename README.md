@@ -66,10 +66,14 @@
 
 
 > Class Diagram (UML)
+### Stage
+![Diagram](BattleTime/src/BattleTime/sorce/BattleTime_Stage.jpg)
+### Unit
+![Diagram](BattleTime/src/BattleTime/sorce/BattleTime_Unit.jpg)
 
-![diagram]()
 <br>
 <br>
+
 > Demo
 ## 1일차
 **전투(전사, 마법사 스킬 사용), 상점, 저장**
