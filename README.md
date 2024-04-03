@@ -10,8 +10,9 @@
 > 게임 설명
 
 ▼ 길드<br>
-- 전사, 마법사, 힐러 3명으로 구성된 길드입니다.
-- 각 길드원은 공격력과 스킬 포인트를 가지고 있습니다.
+- 전사, 마법사, 힐러 중 3명의 길드원을 선택해 길드를 꾸립니다.
+- 각 직업은 서로 다른 공격력과 Hp를 가지고 있습니다. 
+- 각 직업은 스킬 포인트를 가지고 있습니다.
   - 스킬
       - 전사: <<죽음의 일격>> 한 몬스터에게 공격력 2배의 피해를 입힙니다.
       - 마법사: <<마법의 태풍>> 모든 몬스터에게 공격력 1/2의 피해를 입힙니다.
@@ -66,14 +67,33 @@
 
 
 > Class Diagram (UML)
+### Stage
+![Diagram](BattleTime/src/BattleTime/sorce/BattleTime_Stage.jpg)
+### Unit
+![Diagram](BattleTime/src/BattleTime/sorce/BattleTime_Unit_Update.jpg)
 
-![diagram]()
 <br>
 <br>
+
 > Demo
+## 1일차
+**전투(전사, 마법사 스킬 사용), 상점, 저장**
+![gif](BattleTime/src/BattleTime/sorce/Day1.gif)
+**전투 완료 후 재전투 불가능**
 
-![diagram]()
+<img src="BattleTime/src/BattleTime/sorce/CompleteBattle.png" width="400"/>
+<br>
+<br>
 
-> GAME CLEAR VERSION
+## 2일차
+**전투(포션 사용, 힐러 스킬 사용)**
+![gif](BattleTime/src/BattleTime/sorce/Day2.gif)
+<br>
+<br>
+#### ▼ 10퍼센트의 확률로 스킬포인트가 영구적으로 1 증가합니다.
+<img src="BattleTime/src/BattleTime/sorce/BattleTime_skillPoint.png" width="400"/>
+<br>
 
-![diagram]()
+## 패배
+**전투, 취침**
+![gif](BattleTime/src/BattleTime/sorce/ReBattle.gif)
