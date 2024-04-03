@@ -166,7 +166,8 @@ public class StageBattle extends Stage {
 		if (healPlayer.getHp() > maxHp)
 			healPlayer.setHp(maxHp);
 		temp = healPlayer.getHp() - temp;
-
+		GameManager.potion --;
+		
 		System.out.println("┌────────────────────────────────────────┐");
 		System.out.printf("   [%s]의 체력이 %d만큼 회복되었습니다.\n", healPlayer.getName(), temp);
 		System.out.println("└────────────────────────────────────────┘");

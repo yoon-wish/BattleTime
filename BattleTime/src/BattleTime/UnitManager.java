@@ -83,16 +83,17 @@ public class UnitManager {
 		System.out.println("└──────────────────────────────┘");
 	}
 
-	public void loadPlayer(int[] player) {
+	public void loadPlayer(int[] group) {
 		player_list = new ArrayList<>();
 
-		for (int i = 0; i < player.length; i++) {
-			if (player[i] == WARRIOR) {
-				System.out.println("진입");
+		for (int i = 0; i < group.length; i++) {
+			player = new int[group.length];
+			player[i] = group[i];
+			if (group[i] == WARRIOR) {
 				player_list.add(new PlayerWarrior());
-			} else if (player[i] == WIZARD) {
+			} else if (group[i] == WIZARD) {
 				player_list.add(new PlayerWizard());
-			} else if (player[i] == HEALER) {
+			} else if (group[i] == HEALER) {
 				player_list.add(new PlayerHealer());
 			}
 		}

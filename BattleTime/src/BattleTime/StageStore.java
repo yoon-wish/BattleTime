@@ -111,6 +111,7 @@ public class StageStore extends Stage {
 		System.out.println("보유 포션 : " + GameManager.potion + "개");
 
 		this.potion -= number;
+		GameManager.coin -= number * PRICE;
 
 		return true;
 	}
