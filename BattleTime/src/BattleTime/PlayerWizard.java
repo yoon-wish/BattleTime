@@ -9,7 +9,7 @@ public class PlayerWizard  extends Player{
 	@Override
 	public void skill() {
 		// 마법의 태풍(여러 마리 한 번에 공격) 
-		System.out.println("🔮✨🌌~༺༄ 마법의 태풍 ༄༻~🌌✨🔮");
+		System.out.println(GameManager.ANSI_CYAN + GameManager.ANSI_BOLD + "🔮✨🌌~༺༄ 마법의 태풍 ༄༻~🌌✨🔮"+ GameManager.ANSI_RESET);
 		for(int i=0; i<GameManager.monsterList.size(); i++) {
 			Unit monster = GameManager.monsterList.get(i);
 			monster.setHp(monster.getHp() - this.getPower() / 2);

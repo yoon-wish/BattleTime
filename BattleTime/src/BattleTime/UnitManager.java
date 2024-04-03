@@ -22,12 +22,16 @@ public class UnitManager {
 	public void setPlayer() {
 		player_list = new ArrayList<>();
 		player = new int[SIZE];
-		
+
 		printStart();
 		playerInfo();
 		for (int i = 0; i < SIZE; i++) {
-			System.out.printf("%d번째 길드원 👉 ", i+1);
+			System.out.printf("%d번째 길드원 👉 ", i + 1);
 			int sel = GameManager.sc.nextInt();
+			while (sel != WARRIOR && sel != WIZARD && sel != HEALER) {
+				System.out.printf("%d번째 길드원 👉 ", i + 1);
+				sel = GameManager.sc.nextInt();
+			}
 			player[i] = sel;
 
 			if (sel == WARRIOR) {
@@ -46,21 +50,21 @@ public class UnitManager {
 	private void printStart() {
 		try {
 			Thread.sleep(700);
-			System.out.println("╔═════════════ ⚔️ 𝓑𝓪𝓽𝓽𝓵𝓮 𝓣𝓲𝓶𝓮 ⚔️ ═════════════╗");
-			Thread.sleep(700); 
-			System.out.println("            배틀타임에 온 것을 환영하네!            ");
+			System.out.println(GameManager.ANSI_GREEN + "╔══════════════ ⚔️ 𝓑𝓪𝓽𝓽𝓵𝓮 𝓣𝓲𝓶𝓮 ⚔️ ══════════════╗");
 			Thread.sleep(700);
-			System.out.println("        오늘은 최고의 길드원 3명을 선택해야 해.       ");
+			System.out.println("          배틀타임에 온 것을 환영하네!            ");
 			Thread.sleep(700);
-			System.out.println("      함께라면 모든 도전을 이겨낼 힘을 가질 것이야.    ");
+			System.out.println("      오늘은 최고의 길드원 3명을 선택해야 해.       ");
 			Thread.sleep(700);
-			System.out.println("                  지금 선택하게.                  ");
+			System.out.println("  함께라면 모든 도전을 이겨낼 힘을 가질 것이야.    ");
 			Thread.sleep(700);
-			System.out.println("       우리 팀의 승리를 이끌어 낼 최고의 동료들을!!   ");
+			System.out.println("                지금 선택하게.                  ");
 			Thread.sleep(700);
-			System.out.println("            함께 우리의 모험을 시작하자!            ");
+			System.out.println("  우리 팀의 승리를 이끌어 낼 최고의 동료들을!!   ");
 			Thread.sleep(700);
-			System.out.println("╚═════════════════════════════════════════════╝");
+			System.out.println("          함께 우리의 모험을 시작하자!            ");
+			Thread.sleep(700);
+			System.out.println("╚══════════════════════════════════════════════╝" + GameManager.ANSI_RESET);
 			Thread.sleep(700);
 		} catch (Exception e) {
 		}
@@ -81,7 +85,7 @@ public class UnitManager {
 
 	public void loadPlayer(int[] player) {
 		player_list = new ArrayList<>();
-		
+
 		for (int i = 0; i < player.length; i++) {
 			if (player[i] == WARRIOR) {
 				System.out.println("진입");

@@ -9,7 +9,7 @@ public class PlayerHealer extends Player{
 	@Override
 	public void skill() {
 		// 안정의 선율(팀원 전체 치유 [플레이어 maxHp의 30% 치유])
-		System.out.println("🌿💫✨~༺༄ 안정의 선율 ༄༻~✨💫🌿");
+		System.out.println(GameManager.ANSI_CYAN + GameManager.ANSI_BOLD + "🌿💫✨~༺༄ 안정의 선율 ༄༻~✨💫🌿" + GameManager.ANSI_RESET);
 		for(int i=0; i<GameManager.playerList.size(); i++) {
 			Player player = GameManager.playerList.get(i);
 			double heal = player.getMaxHp() * 0.3;

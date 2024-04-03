@@ -7,6 +7,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GameManager {
+	public static final String ANSI_BOLD = "\u001B[1m";
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+
 	public static Scanner sc = new Scanner(System.in);
 	public static Random rand = new Random();
 	public static String nextStage = "";
@@ -81,16 +86,15 @@ public class GameManager {
 
 	private void setPlayer(String info) {
 		String[] playerInfo = info.split("/");
-		
+
 		int[] player = new int[playerInfo.length];
-		for(int i=0; i<playerInfo.length; i++) {
+		for (int i = 0; i < playerInfo.length; i++) {
 			player[i] = Integer.parseInt(playerInfo[i]);
 		}
-		
+
 		unitManager.loadPlayer(player);
 		playerList = UnitManager.player_list;
 	}
-
 
 	public boolean changeStage() {
 		if (nextStage != "" && nextStage != "TITLE") {
