@@ -88,7 +88,7 @@ public class UnitManager {
 
 		for (int i = 0; i < group.length; i++) {
 			player = new int[group.length];
-			player[i] = group[i];
+			player[i] = group[i]; 
 			if (group[i] == WARRIOR) {
 				player_list.add(new PlayerWarrior());
 			} else if (group[i] == WIZARD) {
