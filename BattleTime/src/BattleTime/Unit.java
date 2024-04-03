@@ -42,10 +42,6 @@ public abstract class Unit {
 		return this.hp;
 	}
 	
-	public int getPower() {
-		return this.power;
-	}
-	
 	// 포션 섭취시
 	public void setHp() {
 		this.hp += 200; 
@@ -54,6 +50,11 @@ public abstract class Unit {
 	public void setHp(int hp) {
 		this.hp = hp; 
 	}
+
+	public int getPower() {
+		return this.power;
+	}
+	
 	
 	public void attack(Unit target) {
 		target.hp -= power;
