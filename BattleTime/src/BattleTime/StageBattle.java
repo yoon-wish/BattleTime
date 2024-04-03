@@ -8,7 +8,7 @@ public class StageBattle extends Stage {
 
 	private int playerDead = 0;
 	private int monsterDead = 0;
-	
+
 	private int monster_idx = 0;
 
 	public static boolean allDead;
@@ -86,27 +86,27 @@ public class StageBattle extends Stage {
 		getCoin();
 
 		int ran = GameManager.rand.nextInt(10);
-		if(ran == 0) {
+		if (ran == 0) {
 			getSp();
 		}
-		
+
 		GameManager.battleNum--;
 		GameManager.ranHp += 3; // 배틀 승리로 몬스터 체력 상승
 		GameManager.ranPower += 10; // 배틀 승리로 몬스터 파워 상승
 	}
-	
+
 	private void getCoin() {
 		int coin = GameManager.rand.nextInt(100) + 200;
 		System.out.println("┌────────────────────────────┐");
 		System.out.println("   배틀에서 승리했다");
 		System.out.printf("   보상으로 %d 코인 획득!\n", coin);
 		System.out.println("└────────────────────────────┘");
-		
+
 		GameManager.coin += coin;
 	}
-	
+
 	private void getSp() {
-		GameManager.maxSp ++;
+		GameManager.maxSp++;
 		System.out.println("┌───────────────────────────────────────┐");
 		System.out.println("   스킬 포인트가 영구히 1 증가했다 !!!");
 		System.out.println("   스킬 포인트: " + GameManager.maxSp);
@@ -166,7 +166,7 @@ public class StageBattle extends Stage {
 		if (healPlayer.getHp() > maxHp)
 			healPlayer.setHp(maxHp);
 		temp = healPlayer.getHp() - temp;
-		
+
 		System.out.println("┌────────────────────────────────────────┐");
 		System.out.printf("   [%s]의 체력이 %d만큼 회복되었습니다.\n", healPlayer.getName(), temp);
 		System.out.println("└────────────────────────────────────────┘");
@@ -179,7 +179,12 @@ public class StageBattle extends Stage {
 		}
 		System.out.println();
 		System.out.println("┌──────────────┐");
-		System.out.println("    🤴🏻" + player.getName() + "");
+		if (player.getName().equals("전사")) 
+			System.out.println("    🤴" + player.getName() + "");
+		else if(player.getName().equals("마법사"))
+			System.out.println("    🧙‍♂️" + player.getName() + "");
+		else if(player.getName().equals("힐러"))
+			System.out.println("    👩‍⚕️" + player.getName() + "");
 		System.out.println("└──────────────┘");
 		System.out.println("┌──────────────┐");
 		System.out.println("    ❶ 어택");
@@ -191,6 +196,7 @@ public class StageBattle extends Stage {
 
 	public void player_attack(int index) {
 		Player player = GameManager.playerList.get(index);
+		String name = player.getName();
 		if (player.getHp() <= 0)
 			return;
 
@@ -214,12 +220,25 @@ public class StageBattle extends Stage {
 		} else if (sel == SKILL) {
 			System.out.println();
 			if (player.getSp() > 0) {
-				player.skill(monster);
-				player.setSp();
+				while (true) {
+					idx = GameManager.rand.nextInt(size);
+					monster = GameManager.monsterList.get(idx);
+					if (monster.getHp() > 0) {
+						System.out.println();
+						if(name.equals("전사"))
+							player.skill(monster);
+						else 
+							player.skill();
+						System.out.println();
+						player.setSp();
+						break;
+					}
+				}
 				System.out.println("\n남은 스킬 포인트: " + player.getSp());
 			} else {
 				System.out.println("┌──────────────────────────────┐");
 				System.out.println("  더이상 스킬을 쓸 수 없다....");
+				System.out.println("  바보같이 차례를 놓쳤다....");
 				System.out.println("└──────────────────────────────┘");
 			}
 		} else if (sel == INVENTORY) {
@@ -231,17 +250,17 @@ public class StageBattle extends Stage {
 
 	public void monster_attack() {
 		int size = GameManager.monsterList.size();
-		
-		while(monster_idx<size) {
-			if(GameManager.monsterList.get(monster_idx).getHp() == 0) {
+
+		while (monster_idx < size) {
+			if (GameManager.monsterList.get(monster_idx).getHp() == 0) {
 				monster_idx += 1;
-				if(monster_idx == size) {
+				if (monster_idx == size) {
 					return;
 				}
 			} else
 				break;
 		}
-		
+
 		Unit monster = GameManager.monsterList.get(monster_idx);
 		if (monster.getHp() <= 0)
 			return;

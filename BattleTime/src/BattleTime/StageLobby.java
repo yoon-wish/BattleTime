@@ -86,8 +86,21 @@ public class StageLobby extends Stage {
 
 	private String saveInfo() {
 		// 날짜/포션/코인/몬스터Hp/몬스터Power/플레이어sp
-		return GameManager.day + "/" + GameManager.potion + "/" + GameManager.coin + "/" + GameManager.ranHp + "/"
+		// 플레이어1/플레이어2/플레이어3
+		String info = GameManager.day + "/" + GameManager.potion + "/" + GameManager.coin + "/" + GameManager.ranHp + "/"
 				+ GameManager.ranPower + "/" + GameManager.maxSp;
+		
+		info += "\n";
+		
+		int size = UnitManager.player.length;
+		for(int i=0; i<size; i++) {
+			info += UnitManager.player[i];
+			
+			if(i < size - 1) {
+				info += "/";
+			}
+		}
+		return info;
 	}
 
 }
