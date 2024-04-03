@@ -4,7 +4,7 @@ public class Player extends Unit {
 	
 	private int sp;
 	
-	Player(String name, int maxHp, int power){
+	public Player(String name, int maxHp, int power){
 		super(name, maxHp, power);
 		this.sp = GameManager.maxSp;
 	}

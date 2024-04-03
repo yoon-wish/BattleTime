@@ -1,6 +1,6 @@
 package BattleTime;
 
-public class UnitBat extends Unit{
+public class UnitBat extends Monster{
 	public UnitBat() {
 		setName("박쥐");
 	}
